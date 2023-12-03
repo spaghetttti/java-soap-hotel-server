@@ -10,20 +10,16 @@ public class Room {
     private double pricePerNight;
     private int numberOfBeds;
     private  int numberOfPeople;
-//    private boolean isAvailable;
     private List<Reservation> reservations;
 
     private String imageUrl ;
-//    private User client;
 
     public Room(int roomNumber, String roomType, double pricePerNight, int numberOfBeds, int numberOfPeople, String imageUrl) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.pricePerNight = pricePerNight;
-//        this.isAvailable = true;
         this.numberOfBeds = numberOfBeds;
         this.numberOfPeople = numberOfPeople;
-//        this.client = null;
         this.reservations = new ArrayList<>();
         this.imageUrl = imageUrl;
     }
@@ -32,10 +28,8 @@ public class Room {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.pricePerNight = pricePerNight;
-//        this.isAvailable = false;
         this.numberOfBeds = numberOfBeds;
         this.numberOfPeople = numberOfPeople;
-//        this.client = client;
         reservations = new ArrayList<>();
         reservations.add(new Reservation(startDate, endDate, client));
         this.imageUrl = imageUrl;
@@ -53,10 +47,6 @@ public class Room {
         return pricePerNight;
     }
 
-//    public boolean isAvailable() {
-//        return isAvailable;
-//    }
-
     public int getNumberOfBeds() {
         return numberOfBeds;
     }
@@ -65,13 +55,6 @@ public class Room {
         this.numberOfBeds = numberOfBeds;
     }
 
-//    public void bookRoom() {
-//        isAvailable = false;
-//    }
-//
-//    public void releaseRoom() {
-//        isAvailable = true;
-//    }
 
     public int getNumberOfPeople() {
         return numberOfPeople;
@@ -80,29 +63,6 @@ public class Room {
     public void setNumberOfPeople(int numberOfPeople) {
         this.numberOfPeople = numberOfPeople;
     }
-
-//    public User getClient() {
-//        return client;
-//    }
-//
-//    public void setClient(User client) {
-//        this.client = client;
-//    }
-
-
-//    public String CheckForClient() {
-//        if (this.getClient() == null) {
-//            return "No client";
-//        } else {
-//            return this.getClient().toString();
-//        }
-//    }
-
-
-//    public void setAvailable(boolean available) {
-//        isAvailable = available;
-//    }
-
 
     public void setPricePerNight(double pricePerNight) {
         this.pricePerNight = pricePerNight;
@@ -117,16 +77,14 @@ public class Room {
         if (reservations == null) return true;
         for (Reservation reservation : reservations) {
             if (reservation.overlaps(startDate, endDate)) {
-                return false; // Room is already booked for this period
+                return false;
             }
         }
-        return true; // Room is available for the given dates
+        return true;
     }
 
     public String reserveRoom(Date startDate, Date endDate, User client) {
-//        if (!this.isAvailable(startDate, endDate)) {
-//            return "nope, room can't be reserved for these dates it's already reserved for another client :(";
-//        }
+
         Reservation reservation = new Reservation(startDate,endDate, client);
         this.reservations.add(reservation);
         return "Congratulations, room # " + this.roomNumber + " is reserved for you from " + startDate.toString() + " to " + endDate.toString() + "\nYour reservation ID: " + reservation.getReservation_id();

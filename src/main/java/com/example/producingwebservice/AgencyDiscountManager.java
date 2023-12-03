@@ -34,7 +34,7 @@ public class AgencyDiscountManager {
     private static void applyDiscountToRooms(List<Room> rooms, double discount) {
         for (Room room : rooms) {
             double discountedPrice = room.getPricePerNight() * (1 - discount);
-            room.setPricePerNight(discountedPrice);
+            room.setPricePerNight(Math.floor(discountedPrice));
         }
     }
 }

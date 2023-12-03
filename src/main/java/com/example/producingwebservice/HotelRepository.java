@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 
 @Component
 public class HotelRepository {
-//	private static final Map<String, Country> countries = new HashMap<>();
 	private Hotel hotel;
 	ArrayList<User> listOfUsers = new ArrayList<>();
 

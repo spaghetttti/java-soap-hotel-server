@@ -52,26 +52,29 @@ public class TestingReservation {
     }
 
 
-    public void reserveRoom(String hotelName, int roomNumber, String firstName) {
+    public String reserveRoom(int roomNumber, Date startDate, Date endDate, String firstName, String lastName, String creditCardNumber) {
         boolean roomFound = false;
 
-                for (Room room : hotel.getRooms()) {
-                    if (room.getRoomNumber() == roomNumber) {
-                        roomFound = true;
+        for (Room room : hotel.getRooms()) {
+            if (room.getRoomNumber() == roomNumber) {
+                roomFound = true;
 
-//                        if (room.) { this shit doesn't work
-////                            room.bookRoom();
-////                            room.setClient(findUserByFirstName(listOfUsers, firstName));
-//                            System.out.println("Room " + roomNumber + " in " + hotelName + " has been reserved for " + firstName);
-//                        } else {
-//                            System.out.println("Sorry, but the room " + roomNumber + " in " + hotelName + " is already reserved.");
-//                        }
-                    }
+                if (room.isAvailable(startDate, endDate)) {
+//                    room.bookRoom();
+
+                    User client = new User(firstName, lastName, creditCardNumber);
+//                    room.setClient(client);
+                    return(room.reserveRoom(startDate, endDate, client));
+                } else {
+                    return("Sorry, but the room " + roomNumber + " in " +  hotel.getName() + " is already reserved.");
                 }
+            }
+        }
 
         if (!roomFound) {
-            System.out.println("No room with the number " + roomNumber + " found in " + hotelName + ".");
+            return("No room with the number " + roomNumber + " found in " + hotel.getName() + ".");
         }
+        return "Unexpected error when trying to reserve room: " + roomNumber;
     }
     public List<Room> checkForAvailableRooms(Date startDate,Date endDate) {
         List<Room> availableRooms = hotel.findAvailableRooms(startDate, endDate, 2);
