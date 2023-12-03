@@ -47,11 +47,13 @@ public class Reservation {
     @Override
     public String toString() {
         return "Reservation{" +
-                "startDate=" + startDate +
+                "reservation_id='" + reservation_id + '\'' +
+                ", startDate=" + startDate +
                 ", endDate=" + endDate +
-                "} ";
+                ", client=" + client +
+                '}';
     }
-    // Constructor, getters, setters for startDate and endDate...
+
 
         public boolean overlaps(Date start, Date end) {
             return !(start.after(endDate) || end.before(startDate));
