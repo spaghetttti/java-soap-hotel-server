@@ -1,0 +1,84 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://spring.io/guides/gs-producing-web-service"
+           targetNamespace="http://spring.io/guides/gs-producing-web-service" elementFormDefault="qualified">
+
+    <!-- Request for checking room availability -->
+    <xs:element name="checkRoomAvailabilityRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="agencyId" type="xs:string"/>
+                <xs:element name="agencyPassword" type="xs:string"/>
+                <xs:element name="hotelName" type="xs:string"/>
+                <xs:element name="startDate" type="xs:date"/>
+                <xs:element name="endDate" type="xs:date"/>
+                <xs:element name="numberOfPeople" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Response for room availability check -->
+    <xs:element name="checkRoomAvailabilityResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="availableRooms" type="xs:string" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Reservation request -->
+    <xs:element name="makeReservationRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="agencyId" type="xs:string"/>
+                <xs:element name="agencyPassword" type="xs:string"/>
+                <xs:element name="hotelName" type="xs:string"/>
+                <xs:element name="roomNumber" type="xs:int"/>
+                <xs:element name="startDate" type="xs:date"/>
+                <xs:element name="endDate" type="xs:date"/>
+                <xs:element name="firstName" type="xs:string"/>
+                <xs:element name="lastName" type="xs:string"/>
+                <xs:element name="creditCardNumber" type="xs:string"/>
+                <!-- Other reservation details like start date, end date, etc. can be added here -->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Response for reservation request -->
+    <xs:element name="makeReservationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="reservationResponse" type="xs:string" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+<!--    <xs:element name="makeReservationResponse" type="xs:string"/>-->
+
+    <!-- Define complex types for other elements like hotels, rooms, users, etc. if needed -->
+
+    <!-- Hotel complex type -->
+    <xs:complexType name="Hotel">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="address" type="xs:string"/>
+            <xs:element name="price" type="xs:double"/>
+            <xs:element name="stars" type="xs:int"/>
+            <!-- Define rooms as a separate element -->
+<!--            <xs:element name="rooms" type="tns:RoomList"/>-->
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Room complex type -->
+    <xs:complexType name="Room">
+        <xs:sequence>
+            <xs:element name="roomNumber" type="xs:int"/>
+            <xs:element name="roomType" type="xs:string"/>
+            <xs:element name="pricePerNight" type="xs:double"/>
+            <xs:element name="numberOfBeds" type="xs:int"/>
+            <xs:element name="isAvailable" type="xs:boolean"/>
+            <!-- Define reservations as a separate element -->
+<!--            <xs:element name="reservations" type="tns:ReservationList" minOccurs="0"/>-->
+            <!-- Define client as a separate element -->
+<!--            <xs:element name="client" type="tns:User" minOccurs="0"/>-->
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
